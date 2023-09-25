@@ -51,5 +51,11 @@ public class AdminDaoImpl extends BaseDao implements AdminDao{
         String sql = "delete from book where bookName = ?";
         return update(sql,bookName);
     }
+
+    @Override
+    public boolean updateBook(Book book, int bookId) {
+        String sql = "update book set bookName = ?,publisher = ?,author = ?, bookType = ?, remain = ? where bookId = ?";
+        return update(sql,book.getBookName(),book.getPublisher(),book.getAuthor(),book.getBookType(),book.getRemain(),bookId);
+    }
 }
 

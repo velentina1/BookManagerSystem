@@ -22,4 +22,6 @@ public interface AdminDao {
     boolean addBook(Book book);
 
     boolean deleteBookByName(String bookName);
+
+    boolean updateBook(Book book, int bookId);
 }

@@ -11,6 +11,7 @@ public class Test {
 //        adminService.deleteUser();
 //        adminService.selectUserInfo();
 //        adminService.addBook();
-        adminService.deleteBook();
+//        adminService.deleteBook();
+        adminService.updateBook();
     }
 }

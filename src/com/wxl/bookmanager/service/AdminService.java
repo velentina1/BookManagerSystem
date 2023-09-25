@@ -190,6 +190,39 @@ public class AdminService {
         }
     }
     //修改图书
+    public boolean updateBook(){
+        System.out.println("请输入要修改的图书名：");
+        String bookName = scanner.next();
+        //id修改图书信息
+        int bookId = bookDao.getIdByName(bookName);
+        System.out.println("修改后的图书名：");
+        String newBookName = scanner.next();
+        System.out.println("修改后的出版社：");
+        String publisher = scanner.next();
+        System.out.println("修改后的作者：");
+        String author = scanner.next();
+        System.out.println("修改后的类别：");
+        String bookType = scanner.next();
+        System.out.println("修改后的数量：");
+        int remain = scanner.nextInt();
 
+        Book book = new Book();
+        book.setBookName(newBookName);
+        book.setPublisher(publisher);
+        book.setAuthor(author);
+        book.setBookType(bookType);
+        book.setRemain(remain);
+
+        //调用
+        boolean result = adminDao.updateBook(book,bookId);
+        if (result){
+            System.out.println("修改成功");
+            return true;
+        }
+        else {
+            System.out.println("修改失败");
+            return false;
+        }
+    }
     //查询图书
 }
