@@ -39,6 +39,10 @@ public class BaseDao {
             JDBCUtil.bindPstmt(pstmt,params);
             rs = pstmt.executeQuery();
             ResultSetMetaData metaData = rs.getMetaData();
+//            for (int i = 0; i < metaData.getColumnCount(); i++) {
+//                System.out.println(metaData.getColumnLabel(i+1));
+//            }
+
 
             while (rs.next()){
                 bean = tClass.newInstance();
@@ -46,6 +50,8 @@ public class BaseDao {
                     BeanUtils.setProperty(bean,
                             metaData.getColumnLabel(i+1),
                             rs.getObject(i+1));
+//                    System.out.println(rs.getObject(i+1));
+
                 }
 
             }

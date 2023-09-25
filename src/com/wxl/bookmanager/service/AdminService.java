@@ -171,7 +171,7 @@ public class AdminService {
         } else {
             //判断图书借阅情况
             int bookId = bookDao.getIdByName(bookName);
-            System.out.println(bookId);
+//            System.out.println(bookId);
             boolean rs = borrowDao.selectBorrowInfoById(bookId);
             if (rs){
                 System.out.println("该图书被借阅不能删除！");
