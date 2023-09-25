@@ -1,12 +1,14 @@
 package com.wxl.bookmanager.service;
 
 import com.wxl.bookmanager.bean.Admin;
+import com.wxl.bookmanager.bean.BorrowDTO;
 import com.wxl.bookmanager.bean.User;
 import com.wxl.bookmanager.dao.AdminDao;
 import com.wxl.bookmanager.dao.AdminDaoImpl;
 import com.wxl.bookmanager.dao.UserDao;
 import com.wxl.bookmanager.dao.UserDaoImpl;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -109,6 +111,17 @@ public class AdminService {
                 System.out.println("删除失败");
                 return false;
             }
+        }
+    }
+    //查询指定用户的信息及借阅信息
+    public void selectUserInfo(){
+        System.out.println("请输入要查询信息的用户名");
+        String userName = scanner.next();
+        List<BorrowDTO> borrowDTOList = adminDao.selectUserBorrowInfo(userName);
+        if (borrowDTOList != null){
+            System.out.println(borrowDTOList);
+        }else {
+            System.out.println("没有查询到对应的数据！");
         }
     }
 }

@@ -1,7 +1,10 @@
 package com.wxl.bookmanager.dao;
 
 import com.wxl.bookmanager.bean.Admin;
+import com.wxl.bookmanager.bean.BorrowDTO;
 import com.wxl.bookmanager.bean.User;
+
+import java.util.List;
 
 public class AdminDaoImpl extends BaseDao implements AdminDao{
     @Override
@@ -28,4 +31,11 @@ public class AdminDaoImpl extends BaseDao implements AdminDao{
         String sql = "delete from book_user where userName = ?";
         return update(sql,userName);
     }
+
+    @Override
+    public List<BorrowDTO> selectUserBorrowInfo(String userName) {
+        String sql = "select u.userName as userName, u.phone as phone, b2.bookName as bookName, b1.borrowtime as borrowtime, b1.returntime as returntime from book_user as u left join borrowinfo as b1 on u.userId = b1.userId left join book as b2 on b1.bookId = b2.bookId where u.userName = ?";
+        return QueryAll(BorrowDTO.class,sql,userName);
+    }
 }
+

@@ -9,5 +9,6 @@ public class Test {
 //        adminService.addUser();
 //        adminService.updatePassword();
 //        adminService.deleteUser();
+        adminService.selectUserInfo();
     }
 }
