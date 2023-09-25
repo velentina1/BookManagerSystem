@@ -1,4 +1,4 @@
-package com.iweb925.javaProject.bookermanager.bean;
+package com.wxl.bookmanager.bean;
 
 public class Book {
     private int bookId;

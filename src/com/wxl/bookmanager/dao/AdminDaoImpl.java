@@ -1,6 +1,7 @@
 package com.wxl.bookmanager.dao;
 
 import com.wxl.bookmanager.bean.Admin;
+import com.wxl.bookmanager.bean.Book;
 import com.wxl.bookmanager.bean.BorrowDTO;
 import com.wxl.bookmanager.bean.User;
 
@@ -34,8 +35,21 @@ public class AdminDaoImpl extends BaseDao implements AdminDao{
 
     @Override
     public List<BorrowDTO> selectUserBorrowInfo(String userName) {
-        String sql = "select u.userName as userName, u.phone as phone, b2.bookName as bookName, b1.borrowtime as borrowtime, b1.returntime as returntime from book_user as u left join borrowinfo as b1 on u.userId = b1.userId left join book as b2 on b1.bookId = b2.bookId where u.userName = ?";
+        String sql = "select u.userName as userName, u.phone as phone, b2.bookName as bookName, b1.borrowtime as borrowtime, b1.returntime as returntime from book_user as u left join borrowinfo as b1 on u.userId = b1.userId left join book as b2 on b1.bookId = b2.bookId where u.userName like ?";
+        userName = "%" + userName + "%";
         return QueryAll(BorrowDTO.class,sql,userName);
+    }
+
+    @Override
+    public boolean addBook(Book book) {
+        String sql = "insert into book (bookName,publisher,author,bookType,remain) values (?,?,?,?,?)";
+        return update(sql,book.getBookName(),book.getPublisher(),book.getAuthor(),book.getBookType(),book.getRemain());
+    }
+
+    @Override
+    public boolean deleteBookByName(String bookName) {
+        String sql = "delete from book where bookName = ?";
+        return update(sql,bookName);
     }
 }
 

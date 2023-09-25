@@ -1,6 +1,7 @@
 package com.wxl.bookmanager.dao;
 
 import com.wxl.bookmanager.bean.Admin;
+import com.wxl.bookmanager.bean.Book;
 import com.wxl.bookmanager.bean.BorrowDTO;
 import com.wxl.bookmanager.bean.User;
 
@@ -17,4 +18,8 @@ public interface AdminDao {
 
     boolean deleteUser(String userName);
     List <BorrowDTO> selectUserBorrowInfo(String userName);
+
+    boolean addBook(Book book);
+
+    boolean deleteBookByName(String bookName);
 }

@@ -9,6 +9,8 @@ public class Test {
 //        adminService.addUser();
 //        adminService.updatePassword();
 //        adminService.deleteUser();
-        adminService.selectUserInfo();
+//        adminService.selectUserInfo();
+//        adminService.addBook();
+        adminService.deleteBook();
     }
 }

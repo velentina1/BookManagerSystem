@@ -69,6 +69,7 @@ public class BaseDao {
         try{
             conn = JDBCUtil.getConnection();
             pstmt = JDBCUtil.getPreparedStatement(sql,conn);
+//            params[0] = "%" + params[0] + "%"; //模糊
             JDBCUtil.bindPstmt(pstmt,params);
             rs = pstmt.executeQuery();
             ResultSetMetaData metaData = rs.getMetaData();
