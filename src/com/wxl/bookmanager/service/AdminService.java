@@ -250,6 +250,7 @@ public class AdminService {
         }
     }
 
+    //添加借阅
     public boolean addBorrowInfo() {
         System.out.println("请输入借阅用户名");
         String userName = scanner.next();
@@ -304,5 +305,50 @@ public class AdminService {
             System.out.println("借书失败");
             return false;
         }
+    }
+
+    //查询所有借阅信息
+    public void selectAllBorrowInfo(){
+        System.out.println("显示所有借阅信息");
+        List<BorrowDTO> borrowDTOList = borrowDao.selectAllInfo();
+        System.out.println(borrowDTOList);
+    }
+    
+    //管理员还书
+    public void returnBook(){
+        System.out.println("请输入要还书籍的名称：");
+        String bookName = scanner.next();
+        System.out.println("请输入还书人的用户名：");
+        String userName = scanner.next();
+        User user = userDao.selectUser(userName);
+        int userId = user.getUserId();
+        if (user == null) {
+            System.out.println("用户不存在");
+        }
+        List<Book> books = bookDao.selectBookByName(bookName);
+        Book book = null;
+        for (Book book1 : books
+        ) {
+            book = book1;
+        }
+        int bookId = book.getBookId();
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String returnTime = sdf.format(date);
+        BorrowInfo borrowInfo = new BorrowInfo();
+        borrowInfo.setUserId(userId);
+        borrowInfo.setBookId(bookId);
+        borrowInfo.setReturntime(returnTime);
+        borrowInfo.setIsreturn(1);
+        boolean result = borrowDao.updateBorrowInfo(borrowInfo);
+
+        boolean result2 = bookDao.updateBookRemainAdd(bookId);
+
+        if(result && result2){
+            System.out.println("归还成功");
+        }else {
+            System.out.println();
+        }
+
     }
 }

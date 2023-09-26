@@ -1,5 +1,6 @@
 package com.wxl.bookmanager.dao;
 
+import com.wxl.bookmanager.bean.BorrowDTO;
 import com.wxl.bookmanager.bean.BorrowInfo;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface BorrowDao {
     List<BorrowInfo> selectBorrowTimeInfo(int userId);
 
     boolean addBorrowInfo(BorrowInfo borrowInfo);
+
+    List<BorrowDTO> selectAllInfo();
+
+    boolean updateBorrowInfo(BorrowInfo borrowInfo);
 }
