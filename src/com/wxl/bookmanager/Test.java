@@ -12,6 +12,7 @@ public class Test {
 //        adminService.selectUserInfo();
 //        adminService.addBook();
 //        adminService.deleteBook();
-        adminService.updateBook();
+//        adminService.updateBook();
+//        adminService.selectBook();
     }
 }

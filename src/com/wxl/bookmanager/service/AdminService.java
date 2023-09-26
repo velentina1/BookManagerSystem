@@ -225,4 +225,21 @@ public class AdminService {
         }
     }
     //查询图书
+    public void selectBook(){
+        System.out.println("请输入查询内容，查询所有图书输入1，查询指定名称输入2");
+        int i = scanner.nextInt();
+        if (i == 1){
+            System.out.println("查询所有图书");
+            List<Book> books = bookDao.selectAllBook();
+            System.out.println(books);
+        } else if(i == 2){
+            System.out.println("按照名字查询图书");
+            System.out.println("请输入查询书籍的名称");
+            String bookName = scanner.next();
+            List<Book> books = bookDao.selectBookByName(bookName);
+            System.out.println(books);
+        } else {
+            System.out.println("输入有误！");
+        }
+    }
 }
