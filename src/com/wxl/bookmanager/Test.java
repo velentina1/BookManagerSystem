@@ -14,5 +14,6 @@ public class Test {
 //        adminService.deleteBook();
 //        adminService.updateBook();
 //        adminService.selectBook();
+//        adminService.addBorrowInfo();
     }
 }

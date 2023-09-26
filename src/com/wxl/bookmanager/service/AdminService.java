@@ -1,11 +1,10 @@
 package com.wxl.bookmanager.service;
 
-import com.wxl.bookmanager.bean.Admin;
-import com.wxl.bookmanager.bean.Book;
-import com.wxl.bookmanager.bean.BorrowDTO;
-import com.wxl.bookmanager.bean.User;
+import com.wxl.bookmanager.bean.*;
 import com.wxl.bookmanager.dao.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -16,8 +15,9 @@ public class AdminService {
     UserDao userDao = new UserDaoImpl();
     BookDao bookDao = new BookDaoImpl();
     BorrowDao borrowDao = new BorrowDaoImpl();
+
     //登录方法
-    public boolean login(){
+    public boolean login() {
         System.out.println("请输入用户名:");
         String userName = scanner.next();
         System.out.println("请输入和密码：");
@@ -27,19 +27,20 @@ public class AdminService {
             System.out.println("用户名不能为空");
             return false;
         }
-        if ("admin".equals(userName)){
+        if ("admin".equals(userName)) {
             Admin admin = adminDao.selectAdmin(userName);
-            String adminPassword = admin.getAdminPassword();;
+            String adminPassword = admin.getAdminPassword();
+            ;
             if (adminPassword.equals(password)) {
                 System.out.println("登陆成功");
-                return  true;
+                return true;
             } else {
                 System.out.println("密码错误");
-                return  false;
+                return false;
             }
-        }  else {
-            User user =  userDao.selectUser(userName);
-            if (user == null){
+        } else {
+            User user = userDao.selectUser(userName);
+            if (user == null) {
                 System.out.println("用户名不存在，请联系管理员！");
                 return false;
             }
@@ -54,7 +55,7 @@ public class AdminService {
     }
 
     //增加用户
-    public boolean addUser(){
+    public boolean addUser() {
         System.out.println("请输入添加的用户名：");
         String username = scanner.next();
         System.out.println("请输入添加的密码：");
@@ -63,7 +64,7 @@ public class AdminService {
         String phone = scanner.next();
         System.out.println("请输入添加的生日：");
         String birthday = scanner.next();
-        User user = new User(username,password,phone,birthday);
+        User user = new User(username, password, phone, birthday);
         boolean result = adminDao.addUser(user);
         if (result) {
             System.out.println("添加成功");
@@ -74,8 +75,9 @@ public class AdminService {
         }
 
     }
+
     //修改密码
-    public boolean updatePassword(){
+    public boolean updatePassword() {
         System.out.println("请输入你要修改密码的用户名：");
         String userName = scanner.next();
         System.out.println("请输入新密码：");
@@ -85,50 +87,53 @@ public class AdminService {
         if (!pwd1.equals(pwd2)) {
             return false;
         }
-        boolean result = adminDao.updatePWD(userName,pwd1);
-        if (result){
+        boolean result = adminDao.updatePWD(userName, pwd1);
+        if (result) {
             System.out.println("修改密码成功");
             return true;
-        }else {
+        } else {
             System.out.println("修改密码失败");
             return false;
         }
     }
+
     //删除用户
-    public boolean deleteUser(){
+    public boolean deleteUser() {
         System.out.println("请输入要删除的用户名：");
         String userName = scanner.next();
         System.out.println("你确定删除" + userName + "这个用户信息吗？Y/N");
         String ok = scanner.next();
         if ("N".equals(ok)) {
             return false;
-        }else if (!"Y".equals(ok)){
+        } else if (!"Y".equals(ok)) {
             System.out.println("请规范输入");
             return false;
         } else {
             boolean result = adminDao.deleteUser(userName);
-            if (result){
+            if (result) {
                 System.out.println("删除成功");
                 return true;
-            }else {
+            } else {
                 System.out.println("删除失败");
                 return false;
             }
         }
     }
+
     //查询指定用户的信息及借阅信息
-    public void selectUserInfo(){
+    public void selectUserInfo() {
         System.out.println("请输入要查询信息的用户名");
         String userName = scanner.next();
         List<BorrowDTO> borrowDTOList = adminDao.selectUserBorrowInfo(userName);
-        if (borrowDTOList != null){
+        if (borrowDTOList != null) {
             System.out.println(borrowDTOList);
-        }else {
+        } else {
             System.out.println("没有查询到对应的数据！");
         }
     }
+
     //增加图书
-    public boolean addBook(){
+    public boolean addBook() {
         System.out.println("请输入要增加书籍的名称：");
         String bookName = scanner.next();
         System.out.println("请输入要增加书籍的出版社：");
@@ -149,23 +154,24 @@ public class AdminService {
 
         boolean result = adminDao.addBook(book);
 
-        if(result){
+        if (result) {
             System.out.println("添加书籍成功");
             return true;
-        }else {
+        } else {
             System.out.println("添加书籍失败");
             return false;
         }
     }
+
     //删除图书
-    public boolean deleteBook(){
+    public boolean deleteBook() {
         System.out.println("请输入你要删除的图书的名称");
         String bookName = scanner.next();
         System.out.println("你确定删除" + bookName + "这本书籍信息吗？Y/N");
         String ok = scanner.next();
-        if ("N".equals(ok)){
+        if ("N".equals(ok)) {
             return false;
-        }else if (!"Y".equals(ok)){
+        } else if (!"Y".equals(ok)) {
             System.out.println("请规范输入");
             return false;
         } else {
@@ -173,10 +179,10 @@ public class AdminService {
             int bookId = bookDao.getIdByName(bookName);
 //            System.out.println(bookId);
             boolean rs = borrowDao.selectBorrowInfoById(bookId);
-            if (rs){
+            if (rs) {
                 System.out.println("该图书被借阅不能删除！");
                 return false;
-            }else {
+            } else {
                 //删除
                 boolean result = adminDao.deleteBookByName(bookName);
                 if (result) {
@@ -189,8 +195,9 @@ public class AdminService {
             }
         }
     }
+
     //修改图书
-    public boolean updateBook(){
+    public boolean updateBook() {
         System.out.println("请输入要修改的图书名：");
         String bookName = scanner.next();
         //id修改图书信息
@@ -214,25 +221,25 @@ public class AdminService {
         book.setRemain(remain);
 
         //调用
-        boolean result = adminDao.updateBook(book,bookId);
-        if (result){
+        boolean result = adminDao.updateBook(book, bookId);
+        if (result) {
             System.out.println("修改成功");
             return true;
-        }
-        else {
+        } else {
             System.out.println("修改失败");
             return false;
         }
     }
+
     //查询图书
-    public void selectBook(){
+    public void selectBook() {
         System.out.println("请输入查询内容，查询所有图书输入1，查询指定名称输入2");
         int i = scanner.nextInt();
-        if (i == 1){
+        if (i == 1) {
             System.out.println("查询所有图书");
             List<Book> books = bookDao.selectAllBook();
             System.out.println(books);
-        } else if(i == 2){
+        } else if (i == 2) {
             System.out.println("按照名字查询图书");
             System.out.println("请输入查询书籍的名称");
             String bookName = scanner.next();
@@ -240,6 +247,62 @@ public class AdminService {
             System.out.println(books);
         } else {
             System.out.println("输入有误！");
+        }
+    }
+
+    public boolean addBorrowInfo() {
+        System.out.println("请输入借阅用户名");
+        String userName = scanner.next();
+
+        System.out.println("请输入要借阅的图书名");
+        String bookName = scanner.next();
+
+        //判断用户方
+        User user = userDao.selectUser(userName);
+        int userId = user.getUserId();
+
+        int count = borrowDao.selectBorrowCount(userId);
+        if (count == 3) {
+            System.out.println("已经借阅了三本书！");
+            return false;
+        }
+        List<BorrowInfo> borrowInfoList = borrowDao.selectBorrowTimeInfo(userId);
+        if (borrowInfoList.size() > 0) {
+            //存在逾期
+            //TODO:返回逾期图书名
+            System.out.println("你存在逾期图书");
+            return false;
+        }
+        //判断书籍方
+        List<Book> books = bookDao.selectBookByName(bookName);
+        Book book = null;
+        for (Book book1 : books
+        ) {
+            book = book1;
+        }
+        int remain = 0;
+        if (book != null) {
+            remain = book.getRemain();
+        }
+        if (remain == 0) {
+            System.out.println("书籍已经被借完了！请选择其他书籍");
+            return false;
+        }
+        int bookId = book.getBookId();
+
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String borrowTime = simpleDateFormat.format(date);
+        BorrowInfo borrowInfo = new BorrowInfo(userId, bookId, borrowTime, null, 0);
+        boolean result = borrowDao.addBorrowInfo(borrowInfo);
+        boolean result1 = bookDao.updateBookRemain(bookId);
+
+        if (result && result1) {
+            System.out.println("借书成功，请及时归还！");
+            return true;
+        } else {
+            System.out.println("借书失败");
+            return false;
         }
     }
 }

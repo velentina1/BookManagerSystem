@@ -28,4 +28,10 @@ public class BookDaoImpl extends BaseDao implements BookDao{
         List<Book> books = QueryAll(Book.class, sql, bookName);
         return books;
     }
+
+    @Override
+    public boolean updateBookRemain(int bookId) {
+        String sql = "update book set remain = remain - 1 where bookId = ?";
+        return update(sql,bookId);
+    }
 }

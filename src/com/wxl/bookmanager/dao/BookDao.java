@@ -12,4 +12,6 @@ public interface BookDao {
     List<Book> selectAllBook();
     //根据名称获取书籍
     List<Book> selectBookByName(String bookName);
+    //书籍数量减一
+    boolean updateBookRemain(int bookId);
 }
