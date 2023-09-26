@@ -8,6 +8,8 @@ public interface BookDao {
     //通过图书名称获取图书id
     int getIdByName(String bookName);
 
+    public String getNameById(int bookId);
+
     //查询所有书籍
     List<Book> selectAllBook();
     //根据名称获取书籍

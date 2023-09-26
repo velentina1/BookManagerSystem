@@ -23,7 +23,7 @@ public class BorrowDaoImpl extends BaseDao implements BorrowDao{
 
     @Override
     public List<BorrowInfo> selectBorrowTimeInfo(int userId) {
-        String sql = "SELECT * FROM borrowinfo WHERE userId = ? AND DATEDIFF(NOW(),borrowtime)>60 AND isreturn = 0";
+        String sql = "SELECT * FROM borrowinfo WHERE userId = ? AND DATEDIFF(NOW(),borrowtime)>10 AND isreturn = 0";
         return QueryAll(BorrowInfo.class,sql,userId);
     }
 

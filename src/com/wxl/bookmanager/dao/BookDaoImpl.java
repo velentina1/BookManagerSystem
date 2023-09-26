@@ -15,6 +15,13 @@ public class BookDaoImpl extends BaseDao implements BookDao{
     }
 
     @Override
+    public String getNameById(int bookId){
+        String sql = "select * from book where bookId = ?";
+        Book book = QueryOne(Book.class,sql,bookId);
+        return book.getBookName();
+    }
+
+    @Override
     public List<Book> selectAllBook() {
         String sql = "select * from book";
         List<Book> books = QueryAll(Book.class, sql);

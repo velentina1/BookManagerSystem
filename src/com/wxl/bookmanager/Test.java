@@ -14,8 +14,8 @@ public class Test {
 //        adminService.deleteBook();
 //        adminService.updateBook();
 //        adminService.selectBook();
-//        adminService.addBorrowInfo();
+        adminService.addBorrowInfo();
 //        adminService.selectAllBorrowInfo();
-        adminService.returnBook();
+//        adminService.returnBook();
     }
 }
