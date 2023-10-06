@@ -14,10 +14,11 @@ public class InterfaceTest {
         System.out.println("---------图书借阅系统----------");
         System.out.println("------请选择您的登录身份：------");
         System.out.println("------1.管理员----2.用户------");
+        System.out.println("--------选择0退出本系统--------");
         Scanner scanner = new Scanner(System.in);
         String UserType = scanner.nextLine();
         //int还是太麻烦了
-        while (!Objects.equals(UserType, "1") && !Objects.equals(UserType, "2")){
+        while (!Objects.equals(UserType, "1") && !Objects.equals(UserType, "2") && !Objects.equals(UserType, "0")){
             System.out.print("输入错误！请重新输入:");
             UserType = scanner.nextLine();
         }
@@ -89,7 +90,7 @@ public class InterfaceTest {
             }
         }
         //用户部分
-        else {
+        else if (UserType.equals("2")){
             System.out.println("--------请登录：--------");
             System.out.println("请输入用户名:");
             String userName = scanner.next();
@@ -138,6 +139,10 @@ public class InterfaceTest {
                         System.out.println("无效的选择，请重新输入。");
                 }
             }
+        }
+        //退出
+        else {
+            System.out.println("感谢您的使用！");
         }
     }
 }
