@@ -32,7 +32,7 @@ public class UserService {
         } else {
             String userPassword = user.getPassword();
             if (userPassword.equals(password)){
-                System.out.println("登陆成功");
+//                System.out.println("登陆成功");
             return true;
             } else {
             System.out.println("密码错误");
@@ -49,11 +49,11 @@ public class UserService {
         login(userName, password);
     }
     // 2，查看个人信息 DONE
-    public void selectUserInfo() {
-        System.out.println("请输入用户名:");
-        String userName = scanner.next();
-        System.out.println("请输入密码：");
-        String password = scanner.next();
+    public void selectUserInfo(String userName,String password) {
+//        System.out.println("请输入用户名:");
+//        String userName = scanner.next();
+//        System.out.println("请输入密码：");
+//        String password = scanner.next();
         if (login(userName, password)) {
             System.out.println("您的个人信息如下：");
             User users = userDao.selectUserInfo(userName);
@@ -63,11 +63,11 @@ public class UserService {
         }
     }
 //    3，修改个人信息，不能修改用户名 DONE
-    public boolean updateUserInfo(){
-        System.out.println("请输入用户名:");
-        String userName = scanner.next();
-        System.out.println("请输入密码：");
-        String password = scanner.next();
+    public boolean updateUserInfo(String userName,String password){
+//        System.out.println("请输入用户名:");
+//        String userName = scanner.next();
+//        System.out.println("请输入密码：");
+//        String password = scanner.next();
         if (login(userName, password)) {
             int userId = userDao.getIdByName(userName);
             System.out.println("请输入新用户名");
@@ -96,11 +96,11 @@ public class UserService {
         }
     }
 //    4，修改密码 DONE
-    public boolean updatePassword() {
-        System.out.println("请输入用户名:");
-        String userName = scanner.next();
-        System.out.println("请输入密码：");
-        String password = scanner.next();
+    public boolean updatePassword(String userName,String password) {
+//        System.out.println("请输入用户名:");
+//        String userName = scanner.next();
+//        System.out.println("请输入密码：");
+//        String password = scanner.next();
         if (login(userName, password)) {
             System.out.println("请输入新密码：");
             String pwd1 = scanner.next();
@@ -141,11 +141,11 @@ public class UserService {
         }
     }
 //    6，查看自己的借阅信息 DONE
-    public void selectUserBorrowInfo(){
-        System.out.println("请输入用户名:");
-        String userName = scanner.next();
-        System.out.println("请输入密码：");
-        String password = scanner.next();
+    public void selectUserBorrowInfo(String userName,String password){
+//        System.out.println("请输入用户名:");
+//        String userName = scanner.next();
+//        System.out.println("请输入密码：");
+//        String password = scanner.next();
         if(login(userName,password)) {
             List<BorrowDTO> borrowDTOList = userDao.selectUserBorrowInfo(userName);
             if (borrowDTOList != null) {
@@ -159,11 +159,11 @@ public class UserService {
 
     }
 //    7，查看自己是否存在逾期借阅信息 DONE
-    public boolean WhetherUserOverdue(){
-        System.out.println("请输入用户名:");
-        String userName = scanner.next();
-        System.out.println("请输入密码：");
-        String password = scanner.next();
+    public boolean WhetherUserOverdue(String userName,String password){
+//        System.out.println("请输入用户名:");
+//        String userName = scanner.next();
+//        System.out.println("请输入密码：");
+//        String password = scanner.next();
         if(login(userName,password)) {
             User user = userDao.selectUser(userName);
 //        //判断

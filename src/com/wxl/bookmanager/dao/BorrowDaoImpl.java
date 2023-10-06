@@ -21,9 +21,9 @@ public class BorrowDaoImpl extends BaseDao implements BorrowDao{
         return borrowInfos.size();
     }
 
-    @Override
+    @Override //逾期时间计算（测试时改成了10）
     public List<BorrowInfo> selectBorrowTimeInfo(int userId) {
-        String sql = "SELECT * FROM borrowinfo WHERE userId = ? AND DATEDIFF(NOW(),borrowtime)>10 AND isreturn = 0";
+        String sql = "SELECT * FROM borrowinfo WHERE userId = ? AND DATEDIFF(NOW(),borrowtime)>60 AND isreturn = 0";
         return QueryAll(BorrowInfo.class,sql,userId);
     }
 

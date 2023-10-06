@@ -23,14 +23,13 @@ public class AdminService {
         System.out.println("请输入和密码：");
         String password = scanner.next();
 
-        if (userName == null || userName == "") {
+        if (userName == null || userName.equals("")) {
             System.out.println("用户名不能为空");
             return false;
         }
         if ("admin".equals(userName)) {
             Admin admin = adminDao.selectAdmin(userName);
             String adminPassword = admin.getAdminPassword();
-            ;
             if (adminPassword.equals(password)) {
                 System.out.println("登陆成功");
                 return true;
@@ -334,7 +333,10 @@ public class AdminService {
         ) {
             book = book1;
         }
-        int bookId = book.getBookId();
+        int bookId = 0;
+        if (book != null) {
+            bookId = book.getBookId();
+        }
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String returnTime = sdf.format(date);
