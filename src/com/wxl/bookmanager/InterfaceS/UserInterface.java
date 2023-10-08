@@ -1,4 +1,4 @@
-package com.wxl.bookmanager.InterfaceTest;
+package com.wxl.bookmanager.InterfaceS;
 
 import com.wxl.bookmanager.service.UserService;
 
@@ -27,7 +27,7 @@ public class UserInterface {
             System.out.println("----4.查看所有图书信息--------------");
             System.out.println("----5.查看所有已借阅信息-------------");
             System.out.println("----6.查询自己是否存在逾期-----------");
-            System.out.println("请输入数字 1-6选择对应功能，输入0退出：");
+            System.out.println("请输入数字 1-6选择对应功能，输入0退出至主界面：");
 
             int input = scanner.nextInt();
             if (input == 0) {

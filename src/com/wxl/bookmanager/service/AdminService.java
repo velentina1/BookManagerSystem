@@ -352,7 +352,7 @@ public class AdminService {
         if(result && result2){
             System.out.println("归还成功");
         }else {
-            System.out.println();
+            System.out.println("归还失败");
         }
 
     }

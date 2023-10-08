@@ -1,7 +1,7 @@
 package com.wxl.bookmanager;
 
-import com.wxl.bookmanager.InterfaceTest.AdminInterface;
-import com.wxl.bookmanager.InterfaceTest.UserInterface;
+import com.wxl.bookmanager.InterfaceS.AdminInterface;
+import com.wxl.bookmanager.InterfaceS.UserInterface;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -14,6 +14,7 @@ public class InterfaceTest1 {
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
         while (choice != 0) {
+            //界面
             System.out.println("---------图书借阅系统----------");
             System.out.println("------请选择您的登录身份：------");
             System.out.println("------1.管理员----2.用户------");

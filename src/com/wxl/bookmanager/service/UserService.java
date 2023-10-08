@@ -177,7 +177,8 @@ public class UserService {
             List<BorrowInfo> borrowInfoList = borrowDao.selectBorrowTimeInfo(userId);
             if (borrowInfoList.size() > 0) {
                 //存在逾期
-                System.out.println("你存在逾期图书，不能借阅，书名如下：");
+                System.out.println("你存在逾期图书，不能借阅！");
+                System.out.println("书名如下：");
                 for (BorrowInfo borrowInfo : borrowInfoList) {
                     String a = bookDao.getNameById(borrowInfo.getBookId());
                     System.out.println(a);

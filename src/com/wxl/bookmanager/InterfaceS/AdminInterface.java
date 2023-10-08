@@ -1,4 +1,4 @@
-package com.wxl.bookmanager.InterfaceTest;
+package com.wxl.bookmanager.InterfaceS;
 
 import com.wxl.bookmanager.service.AdminService;
 
@@ -28,7 +28,7 @@ public class AdminInterface {
             System.out.println("----9.添加借阅信息-----------------");
             System.out.println("----10.查询所有借阅信息-------------");
             System.out.println("----11.办理还书-------------------");
-            System.out.println("请输入数字 1-11选择对应功能，输入0退出：");
+            System.out.println("请输入数字 1-11选择对应功能，输入0退出至主界面：");
 
             int input = scanner.nextInt();
             if (input == 0) {
