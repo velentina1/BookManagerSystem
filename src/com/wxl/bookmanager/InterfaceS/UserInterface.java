@@ -16,7 +16,11 @@ public class UserInterface {
         boolean userYes = userService.login(userName,password);
         while (!userYes){
             System.out.println("登录失败，请重新登录！");
-            userYes = userService.login(userName,password);
+            System.out.println("请输入用户名:");
+            String userNameS = scanner.next();
+            System.out.println("请输入密码：");
+            String passwordS = scanner.next();
+            userYes = userService.login(userNameS,passwordS);
         }
         System.out.println("登陆成功！");
         while (userYes) {

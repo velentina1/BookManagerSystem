@@ -11,7 +11,11 @@ public class BookDaoImpl extends BaseDao implements BookDao{
         String sql = "select * from book where bookName = ?";
         Book book = QueryOne(Book.class,sql,bookName);
 //        System.out.println(book.getBookId());
-        return book.getBookId();
+        if (book == null){
+            return -1;
+        } else {
+            return book.getBookId();
+        }
     }
 
     @Override

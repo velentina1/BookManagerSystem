@@ -11,6 +11,8 @@ public interface BorrowDao {
 
     int selectBorrowCount(int userId);
 
+    int selectRepeatBorrowCount(int userId, int bookId);
+
     List<BorrowInfo> selectBorrowTimeInfo(int userId);
 
     boolean addBorrowInfo(BorrowInfo borrowInfo);
@@ -18,4 +20,5 @@ public interface BorrowDao {
     List<BorrowDTO> selectAllInfo();
 
     boolean updateBorrowInfo(BorrowInfo borrowInfo);
+    boolean updateBorrowInfoByBorrwId(BorrowInfo borrowInfo);
 }

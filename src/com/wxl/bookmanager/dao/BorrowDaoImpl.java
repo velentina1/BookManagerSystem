@@ -21,6 +21,13 @@ public class BorrowDaoImpl extends BaseDao implements BorrowDao{
         return borrowInfos.size();
     }
 
+    @Override
+    public int selectRepeatBorrowCount(int userId, int bookId) {
+        String sql = "SELECT * FROM borrowinfo WHERE userId = ? AND bookId = ? AND isreturn = 0";
+        List<BorrowInfo> borrowInfos = QueryAll(BorrowInfo.class,sql,userId,bookId);
+        return borrowInfos.size();
+    }
+
     @Override //逾期时间计算（测试时改成了10）
     public List<BorrowInfo> selectBorrowTimeInfo(int userId) {
         String sql = "SELECT * FROM borrowinfo WHERE userId = ? AND DATEDIFF(NOW(),borrowtime)>60 AND isreturn = 0";
@@ -43,5 +50,11 @@ public class BorrowDaoImpl extends BaseDao implements BorrowDao{
     public boolean updateBorrowInfo(BorrowInfo borrowInfo) {
         String sql = "update borrowinfo set returntime = ?, isreturn = ? where userId = ? and bookId = ?";
         return update(sql,borrowInfo.getReturntime(),borrowInfo.getIsreturn(),borrowInfo.getUserId(),borrowInfo.getBookId());
+    }
+
+    @Override
+    public boolean updateBorrowInfoByBorrwId(BorrowInfo borrowInfo) {
+        String sql = "update borrowinfo set returntime = ?, isreturn = ? where borrowId = ?";
+        return update(sql,borrowInfo.getReturntime(),borrowInfo.getIsreturn(),borrowInfo.getBorrowId());
     }
 }

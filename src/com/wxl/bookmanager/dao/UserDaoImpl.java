@@ -1,6 +1,7 @@
 package com.wxl.bookmanager.dao;
 
 import com.wxl.bookmanager.bean.BorrowDTO;
+import com.wxl.bookmanager.bean.BorrowReInfo;
 import com.wxl.bookmanager.bean.User;
 
 import java.util.ArrayList;
@@ -37,5 +38,11 @@ public class UserDaoImpl extends BaseDao implements UserDao{
     public List<BorrowDTO> selectUserBorrowInfo(String userName) {
         String sql = "select u.userName as userName, u.phone as phone, b2.bookName as bookName, b1.borrowtime as borrowtime, b1.returntime as returntime from book_user as u left join borrowinfo as b1 on u.userId = b1.userId left join book as b2 on b1.bookId = b2.bookId where u.userName = ?";
         return QueryAll(BorrowDTO.class,sql,userName);
+    }
+
+    @Override
+    public List<BorrowReInfo> selectUserBorrowRepeat(String userName, String bookName) {
+        String sql = "select b1.borrowId as borrowId, u.userName as userName, b2.bookName as bookName, b1.borrowtime as borrowtime from book_user as u left join borrowinfo as b1 on u.userId = b1.userId left join book as b2 on b1.bookId = b2.bookId where u.userName = ? and b2.bookName = ? and b1.isreturn != 1";
+        return QueryAll(BorrowReInfo.class,sql,userName,bookName);
     }
 }
