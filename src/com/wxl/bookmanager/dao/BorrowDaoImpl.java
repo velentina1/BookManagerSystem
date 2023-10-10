@@ -57,4 +57,9 @@ public class BorrowDaoImpl extends BaseDao implements BorrowDao{
         String sql = "update borrowinfo set returntime = ?, isreturn = ? where borrowId = ?";
         return update(sql,borrowInfo.getReturntime(),borrowInfo.getIsreturn(),borrowInfo.getBorrowId());
     }
+    @Override
+    public boolean rollbackAddBorrowInfo(BorrowInfo borrowInfo) {
+        String sql = "delete from borrowInfo where userId = ? and bookId = ? and borrowtime = ? and isreturn = ?";
+        return update(sql, borrowInfo.getUserId(), borrowInfo.getBookId(), borrowInfo.getBorrowtime(), borrowInfo.getIsreturn());
+    }//回滚方法
 }

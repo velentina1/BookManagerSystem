@@ -21,4 +21,5 @@ public interface BorrowDao {
 
     boolean updateBorrowInfo(BorrowInfo borrowInfo);
     boolean updateBorrowInfoByBorrwId(BorrowInfo borrowInfo);
+    boolean rollbackAddBorrowInfo(BorrowInfo borrowInfo);
 }

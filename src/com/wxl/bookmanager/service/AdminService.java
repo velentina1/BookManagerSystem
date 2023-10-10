@@ -270,6 +270,7 @@ public class AdminService {
 
     //添加借阅 DONE:修改数据库√  重复书籍借阅应选择归还哪一本√
     //TODO:是否需要限制同书只能借阅一本？
+    //TODO:事务回滚
     public boolean addBorrowInfo() {
         System.out.println("请输入借阅用户名");
         String userName = scanner.next();
@@ -317,6 +318,7 @@ public class AdminService {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String borrowTime = simpleDateFormat.format(date);
         BorrowInfo borrowInfo = new BorrowInfo(userId, bookId, borrowTime, null, 0);
+        //TODO:事务回滚
         boolean result = borrowDao.addBorrowInfo(borrowInfo);
         boolean result1 = bookDao.updateBookRemain(bookId);
 
@@ -324,7 +326,7 @@ public class AdminService {
             System.out.println("借书成功，请及时归还！");
             return true;
         } else {
-            System.out.println("借书失败");
+            System.out.println("借书失败！");
             return false;
         }
     }
@@ -372,7 +374,7 @@ public class AdminService {
             borrowInfo.setReturntime(returnTime);
             borrowInfo.setIsreturn(1);
             boolean result = borrowDao.updateBorrowInfo(borrowInfo);
-
+            //TODO:事务回滚
             boolean result2 = bookDao.updateBookRemainAdd(bookId);
 
             if(result && result2){
@@ -382,7 +384,7 @@ public class AdminService {
             }
         } else if (count >= 2) {
             //判断有多本同名书籍归还（按照借阅Id）
-            System.out.println("还在写别急");
+            //System.out.println("还在写别急");
             System.out.println("查询到有多本未归还同本书籍借阅信息，请根据borrowId选择归还哪一本：");
             List<BorrowReInfo> borrowReInfoList = userDao.selectUserBorrowRepeat(userName,bookName);
             if (borrowReInfoList != null){
@@ -406,7 +408,7 @@ public class AdminService {
                 borrowInfo.setReturntime(returnTime);
                 borrowInfo.setIsreturn(1);
                 boolean result = borrowDao.updateBorrowInfoByBorrwId(borrowInfo);
-
+                //TODO:事务回滚
                 boolean result2 = bookDao.updateBookRemainAdd(bookId);
 
                 if(result && result2){
@@ -422,3 +424,20 @@ public class AdminService {
 
     }
 }
+//    回头测试
+
+//    boolean result = borrowDao.addBorrowInfo(borrowInfo);
+//if (!result) {
+//        // 如果addBorrowInfo操作失败，你需要决定如何处理。例如，你可以抛出一个异常或返回错误信息。
+//        throw new RuntimeException("添加借阅信息失败");
+//        }
+//
+//        boolean result1 = bookDao.updateBookRemain(bookId);
+//        if (!result1) {
+//        // 如果updateBookRemain操作失败，你需要回滚addBorrowInfo操作。
+//        borrowDao.rollbackAddBorrowInfo(borrowInfo);
+//        throw new RuntimeException("更新书籍剩余数量失败");
+//        }
+//
+//        System.out.println("借书成功，请及时归还！");
+//        return true;

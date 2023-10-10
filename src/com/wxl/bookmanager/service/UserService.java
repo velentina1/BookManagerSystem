@@ -27,7 +27,9 @@ public class UserService {
 
         User user = userDao.selectUser(userName);
         if (user == null){
-            System.out.println("用户不存在！");
+//            System.out.println("用户不存在！");
+//            response.getWriter().write("登录失败");
+
             return false;
         } else {
             String userPassword = user.getPassword();
